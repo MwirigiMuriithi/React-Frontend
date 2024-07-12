@@ -18,7 +18,7 @@ Node JS
 
 #### Navigate to the Repository:
 
-Visit [CodeWeaversAfrica/BackendAPI](https://github.com/CodeWeaversAfrica/React-Frontend).
+Visit [CodeWeaversAfrica/React-Frontend](https://github.com/CodeWeaversAfrica/React-Frontend).
 
 #### Fork the Repository:
 
