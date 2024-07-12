@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useSignup } from '../../hooks/useSignup';
 import { useNavigate } from 'react-router-dom';
-import './Signup.css'
+import './Signup.css';
 
 const Signup = () => {
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const { signup, error, isLoading } = useSignup();
@@ -12,6 +13,7 @@ const Signup = () => {
 
     // State variables for error messages
     const [usernameError, setUsernameError] = useState('');
+    const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
@@ -21,6 +23,7 @@ const Signup = () => {
 
         // Reset previous error messages
         setUsernameError('');
+        setEmailError('');
         setPasswordError('');
         setConfirmPasswordError('');
 
@@ -36,6 +39,15 @@ const Signup = () => {
             isValid = false;
         } else if (username.length > 24) {
             setUsernameError('Username must not exceed 24 characters.');
+            isValid = false;
+        }
+
+        // Email validation
+        if (email.trim() === '') {
+            setEmailError('Email is required.');
+            isValid = false;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            setEmailError('Email is not valid.');
             isValid = false;
         }
 
@@ -72,10 +84,10 @@ const Signup = () => {
 
         // If no errors, attempt signup
         if (isValid) {
-            const success = await signup(username, password);
+            const success = await signup(username, email, password);
             if (success) {
-                // Navigate to the sales page upon successful signup
-                navigate('/sales');
+                // Navigate to the another page upon successful signup
+                //navigate('/path to that page');
             }
         }
     };
@@ -94,6 +106,17 @@ const Signup = () => {
                         required
                     />
                     {usernameError && <div className="error">{usernameError}</div>}
+
+                    <label htmlFor="email">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    {emailError && <div className="error">{emailError}</div>}
+
                     <label htmlFor="password">Password:</label>
                     <input
                         type="password"
@@ -103,6 +126,7 @@ const Signup = () => {
                         required
                     />
                     {passwordError && <div className="error">{passwordError}</div>}
+
                     <label htmlFor="confirmPassword">Confirm Password:</label>
                     <input
                         type="password"
@@ -112,6 +136,7 @@ const Signup = () => {
                         required
                     />
                     {confirmPasswordError && <div className="error">{confirmPasswordError}</div>}
+                    
                     <button type="submit" disabled={isLoading}>
                         {isLoading ? 'Signing Up...' : 'Sign Up'}
                     </button>
@@ -123,3 +148,4 @@ const Signup = () => {
 };
 
 export default Signup;
+
