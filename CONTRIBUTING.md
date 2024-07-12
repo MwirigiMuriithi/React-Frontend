@@ -46,4 +46,4 @@ If your contribution affects the functionality of the project, please update the
 ## Community
 We aim to create a welcoming environment for everyone. Please follow our Code of Conduct.
 
-Thank you for contributing! CodeWeavers community loves you 😊
+Thank you for contributing! With love, from CodeWeavers Community 😊
