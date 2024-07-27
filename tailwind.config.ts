@@ -1,11 +1,13 @@
-/* eslint-disable no-undef */
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss"
+
+const config = {
   darkMode: ["class"],
   content: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+	],
   prefix: "",
   theme: {
     container: {
@@ -51,17 +53,6 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      backgroundImage: {
-        beauty: "url(../src/assets/jpgs/waxing.jpg)",
-        skincare: "url(../src/assets/jpgs/skincare.jpg)",
-        facemask: "url(../src/assets/jpgs/facemask.jpg)",
-        cleaninghero: "url(../src/assets/pngs/service-cleaning.png)",
-      },
-      fontFamily: {
-        OceanlyOceanly: ["OceanlyOceanly", "sans-serif"],
-        Melodrama: ["Melodrama", "sans-serif"],
-        Playfair: ['"Playfair Display"', "sans-serif"],
-      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -84,4 +75,6 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-};
+} satisfies Config
+
+export default config
