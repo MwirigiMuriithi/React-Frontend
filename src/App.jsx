@@ -1,33 +1,37 @@
-import React from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  Navigate,
   RouterProvider,
 } from "react-router-dom";
-import { useAuthContext } from './hooks/useAuthContext';
-import Home from './pages/home/Home';
-import Navbar from './components/global/navbar/Navbar';
+import Home from './pages/Home';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
-import NotFound from './pages/NotFound';
+// import NotFound from './pages/NotFound';
 import BaseLayout from './Layout/BaseLayout';
+import Dashboard from "./pages/dashboard";
+// import AuthProvider from "./contexts/AuthContext";
+import PrivateRoute from "./routes/PrivateRoute";
+import VerifyEmail from "./pages/VerifyEmail";
 
-function App() {
-  const { user } = useAuthContext();
-
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path='/' element={ <BaseLayout />}>
-        <Route index element={<Home />} />
-        <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
-        <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/login" />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    )
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={ <BaseLayout />}>
+      <Route index element={<Home />} />
+      <Route path="/login" element={ <Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
+      <Route path="/verify-email/:shortId" element={<VerifyEmail />} />
+      <Route path="/dashboard" element={
+        <PrivateRoute>
+          <Dashboard />
+        </PrivateRoute>
+        } />
+      {/* <Route path="*" element={<NotFound />} /> */}
+    </Route>
   )
-
+)
+function App() {
   return <RouterProvider router={router} />
 }
 

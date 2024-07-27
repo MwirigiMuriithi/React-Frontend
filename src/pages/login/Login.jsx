@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { useLogin } from '../../hooks/useLogin';
 import './Login.css';
+// import { useAuth } from '../../hooks/useAuth';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login, error, isLoading } = useLogin();
+    // const { loading, errorMessage } = useAuth()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await login(email, password);
+        // await login(email, password);
     };
 
     return (
@@ -32,10 +32,11 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button type="submit" disabled={isLoading}>
-                    {isLoading ? 'Logging In...' : 'Login'}
+                <button type="submit" >
+                    {/* {loading ? 'Logging In...' : 'Login'} */}
+                    Login
                 </button>
-                {error && <div className="error">{error}</div>}
+                {/* {errorMessage && <div className="error">{errorMessage}</div>} */}
             </form>
         </div>
     );
